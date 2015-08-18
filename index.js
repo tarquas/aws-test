@@ -10,7 +10,7 @@ spawn(function*() {
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
   });
 
-  let buckets = yield s3 [promisify] ('listBuckets')({});
+  let buckets = yield s3 [promisify] ('listBuckets') ();
 
   let params = {
     Bucket: buckets.Buckets[0].Name,
@@ -27,12 +27,16 @@ spawn(function*() {
   let putRes = yield web.put(putUrl, {foo: 'bar1'});
 
   if (!putRes || putRes.status !== 200) {
-    throw 'Error uploading payload';
+    throw 'Error uploading payload: ' + (putRes ? putRes.status : 'unknown');
   }
 
   let getRes = yield web.get(getUrl);
 
-  if (!getRes || getRes.status !== 200 || getRes.data.foo !== 'bar1') {
+  if (!getRes || getRes.status !== 200) {
+    throw 'Error downloading payload: ' + (getRes ? getRes.status : 'unknown');
+  }
+
+  if (!getRes.data || getRes.data.foo !== 'bar1') {
     throw 'Downloaded and uploaded payloads don\'t match';
   }
 
