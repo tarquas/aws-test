@@ -1,0 +1,25 @@
+{
+  "name": "aws-test",
+  "version": "1.0.0",
+  "description": "AWS Test",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --harmony index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "aws",
+    "test"
+  ],
+  "author": "Taras Mykhailovych",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "2.1.45",
+    "axios": "0.5.4",
+    "esfunctional": "1.0.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:tarquas/aws-test.git"
+  }
+}
